@@ -5,6 +5,7 @@ public class ClientComputer {
 	private float enable_memory;
 	private String osname;
 	private String os_version;
+	private String ipaddress;
 	
 	public float getMemory() {
 		return memory;
@@ -29,6 +30,12 @@ public class ClientComputer {
 	}
 	public void setOs_version(String os_version) {
 		this.os_version = os_version;
+	}
+	public String getIpaddress(){
+		return ipaddress;
+	}
+	public void setIpaddress(String ipaddress){
+		this.ipaddress = ipaddress;
 	}
 
 }

@@ -31,5 +31,6 @@ public class ClientComputerOperate {
 		OperatingSystemMXBean osmxb = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		return osmxb.getVersion();
 	}
-
+	
+	
 }
