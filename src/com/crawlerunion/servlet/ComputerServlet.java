@@ -1,6 +1,9 @@
 package com.crawlerunion.servlet;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.crawlerunion.dao.ComputerInfo;
 import com.crawlerunion.module.ClientComputer;
+import com.crawlerunion.operate.DownLoad;
 
 /**
  * Servlet implementation class ComputerServlet
@@ -56,11 +60,24 @@ public class ComputerServlet extends HttpServlet {
 			ComputerInfo computerinfo = new ComputerInfo();
 			ClientComputer computer = computerinfo.setComputerInfo();
 			computer.setIpaddress(getIpAddr(request));
-			out.println(computer.getMemory());
-			out.println(computer.getEnable_memory());
-			out.println(computer.getOsname());
-			out.println(computer.getOs_version());
-			out.println(computer.getIpaddress());
+			out.println("Your computer memory is : "+computer.getMemory());
+			out.println("</br>");
+			out.println("Your computer enable memory is: "+computer.getEnable_memory());
+			out.println("</br>");
+			out.println("Your operating system is: "+computer.getOsname());
+			out.println("</br>");
+			out.println("Your operating system version is: "+computer.getOs_version());
+			out.println("</br>");
+			out.println("Your IP address is: "+computer.getIpaddress());
+			out.println("</br>");
+			DownLoad download = new DownLoad();
+			if(download.getInternetRes("D:", "http://121.40.108.253:8080/download/InfoRobot.zip", "InfoRobot.zip"))
+				out.println("The resource download successfully!!!");
+			else
+				out.println("The resource download unsuccessfully!!!");
+		
+			
+			out.println("*****************************************");
 
 			out.println("</BODY>");
 			out.println("<HTML>");

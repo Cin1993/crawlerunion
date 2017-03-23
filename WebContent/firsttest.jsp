@@ -12,7 +12,7 @@
 
 	<form action="/crawlerunion/ComputerServlet" method="get">
 		<input type="hidden" name="type" value="computerinfo"> 
-		<input type="submit" value="click">
+		<input type="submit" value="download" size="30px">
 	</form>
 </body>
 </html>

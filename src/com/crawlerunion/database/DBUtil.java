@@ -19,8 +19,11 @@ public class DBUtil {
     private final static String DRIVER_CLASS="com.mysql.jdbc.Driver";
     private final static String CONN_STR="jdbc:mysql://localhost:3306";
     private final static String DB_USER="root";
-    private final static String DB_PWD="RobotGo!";
-
+    //local database
+   // private final static String DB_PWD="RobotGo!";
+    
+    //253server
+    private final static String DB_PWD="!InfoDB";
     static{
         try{
             Class.forName(DRIVER_CLASS);
