@@ -1,6 +1,9 @@
 package com.crawlerunion.operate;
 
 import java.lang.management.ManagementFactory;
+
+import com.crawlerunion.dao.ComputerInfo;
+import com.crawlerunion.module.ClientComputer;
 import com.sun.management.OperatingSystemMXBean;
 
 public class ClientComputerOperate {
@@ -31,6 +34,14 @@ public class ClientComputerOperate {
 		OperatingSystemMXBean osmxb = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		return osmxb.getVersion();
 	}
-	
+	public static void main(String[] args) {
+		ComputerInfo computerinfo = new ComputerInfo();
+		ClientComputer computer = computerinfo.setComputerInfo();
+		System.out.println("Your computer memory is : "+computer.getMemory()+"GB");
+		System.out.println("Your computer enable memory is: "+computer.getEnable_memory()+"GB");
+		System.out.println("Your operating system is: "+computer.getOsname());
+		System.out.println("Your operating system version is: "+computer.getOs_version());
+		
+	}
 	
 }

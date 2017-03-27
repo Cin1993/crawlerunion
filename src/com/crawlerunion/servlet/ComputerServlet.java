@@ -1,9 +1,6 @@
 package com.crawlerunion.servlet;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -71,11 +68,8 @@ public class ComputerServlet extends HttpServlet {
 			out.println("Your IP address is: "+computer.getIpaddress());
 			out.println("</br>");
 			DownLoad download = new DownLoad();
-			if(download.getInternetRes("D:", "http://121.40.108.253:8080/download/InfoRobot.zip", "InfoRobot.zip"))
-				out.println("The resource download successfully!!!");
-			else
-				out.println("The resource download unsuccessfully!!!");
-		
+			
+			download.download("temop/download", response);
 			
 			out.println("*****************************************");
 
