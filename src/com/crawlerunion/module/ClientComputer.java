@@ -6,6 +6,7 @@ public class ClientComputer {
 	private String osname;
 	private String os_version;
 	private String ipaddress;
+	private String macaddress;
 	
 	public float getMemory() {
 		return memory;
@@ -36,6 +37,12 @@ public class ClientComputer {
 	}
 	public void setIpaddress(String ipaddress){
 		this.ipaddress = ipaddress;
+	}
+	public String getMacaddress() {
+		return macaddress;
+	}
+	public void setMacaddress(String macaddress) {
+		this.macaddress = macaddress;
 	}
 
 }

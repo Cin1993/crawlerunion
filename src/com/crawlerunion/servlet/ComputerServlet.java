@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.crawlerunion.dao.ComputerInfo;
+import com.crawlerunion.database.DBUtil;
 import com.crawlerunion.module.ClientComputer;
 import com.crawlerunion.operate.DownLoad;
 
@@ -57,6 +61,25 @@ public class ComputerServlet extends HttpServlet {
 			ComputerInfo computerinfo = new ComputerInfo();
 			ClientComputer computer = computerinfo.setComputerInfo();
 			computer.setIpaddress(getIpAddr(request));
+			
+			
+			try {
+				computerinfo.insertdata();
+				DBUtil dbu = new DBUtil();
+				Connection conn = dbu.getConn("crawlerunion");
+				String sql = "update client_computer set ipaddress = '" + computer.getIpaddress() + "' where macaddress = " + "'" + computer.getMacaddress() + "'";
+				System.out.println(sql);
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				pstmt.execute();
+				
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 			out.println("Your computer memory is : "+computer.getMemory());
 			out.println("</br>");
 			out.println("Your computer enable memory is: "+computer.getEnable_memory());
@@ -67,10 +90,14 @@ public class ComputerServlet extends HttpServlet {
 			out.println("</br>");
 			out.println("Your IP address is: "+computer.getIpaddress());
 			out.println("</br>");
-			DownLoad download = new DownLoad();
+			out.println("Your MACaddress is: "+computer.getMacaddress());
 			
-			download.download("temop/download", response);
-			
+			//check North American IPAddress
+			if (enableIpaddress(computer.getIpaddress())){
+				DownLoad download = new DownLoad();
+				download.download("temp/download", response);
+			}
+						
 			out.println("*****************************************");
 
 			out.println("</BODY>");

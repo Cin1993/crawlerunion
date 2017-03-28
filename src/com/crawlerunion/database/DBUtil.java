@@ -20,10 +20,10 @@ public class DBUtil {
     private final static String CONN_STR="jdbc:mysql://localhost:3306";
     private final static String DB_USER="root";
     //local database
-   // private final static String DB_PWD="RobotGo!";
+   private final static String DB_PWD="RobotGo!";
     
     //253server
-    private final static String DB_PWD="!InfoDB";
+    //private final static String DB_PWD="!InfoDB";
     static{
         try{
             Class.forName(DRIVER_CLASS);

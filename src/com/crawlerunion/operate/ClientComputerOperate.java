@@ -1,5 +1,8 @@
 package com.crawlerunion.operate;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
 
 import com.crawlerunion.dao.ComputerInfo;
@@ -34,6 +37,63 @@ public class ClientComputerOperate {
 		OperatingSystemMXBean osmxb = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 		return osmxb.getVersion();
 	}
+	
+	
+	// computer MACAddress
+	public String getMACAddress() {
+        String mac = null;
+        BufferedReader bufferedReader = null;
+        Process process = null;
+        try {
+            // CMD查询mac地址
+            process = Runtime.getRuntime().exec("ipconfig /all");
+            bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = null;
+            int index = -1;
+            int index_chi = -1;
+            int index_eng = -1;
+            while ((line = bufferedReader.readLine()) != null) {
+                // 寻找标示字符串physical
+            	index_eng = line.toLowerCase().indexOf("physical address");
+            	// 寻找标示字符串physical
+            	index_chi = line.toLowerCase().indexOf("物理地址");
+                if (index_eng >= 0) {// 找到了
+                    index = line.indexOf(":");// 寻找":"的位置
+                    if (index >= 0) {
+                        // 取出mac地址并去除2边空格
+                        mac = line.substring(index + 1).trim();
+                    }
+                    break;
+                }
+                if (index_chi >= 0){
+                	index = line.indexOf(":");
+                	if(index >= 0){
+                		mac = line.substring(index + 1).trim();
+                	}
+                	break;
+                }
+            }
+        }
+        catch (IOException e) {
+            System.out.println("未获取到网卡地址");
+        }
+        finally {
+            try {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            }
+            catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            bufferedReader = null;
+            process = null;
+        }
+        return mac;
+    }
+	
+	
+	
 	public static void main(String[] args) {
 		ComputerInfo computerinfo = new ComputerInfo();
 		ClientComputer computer = computerinfo.setComputerInfo();
