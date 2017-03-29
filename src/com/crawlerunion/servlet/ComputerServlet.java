@@ -53,50 +53,50 @@ public class ComputerServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		if (request.getParameter("type").equals("computerinfo")) {
 			PrintWriter out = response.getWriter();
-			out.println("<HTML>");
-			out.println("<BODY>");
-			out.print("µÁƒ‘≈‰÷√£∫");
-			out.println("</br>");
-
-			ComputerInfo computerinfo = new ComputerInfo();
-			ClientComputer computer = computerinfo.setComputerInfo();
-			computer.setIpaddress(getIpAddr(request));
-			
-			
-			try {
-				computerinfo.insertdata();
-				DBUtil dbu = new DBUtil();
-				Connection conn = dbu.getConn("crawlerunion");
-				String sql = "update client_computer set ipaddress = '" + computer.getIpaddress() + "' where macaddress = " + "'" + computer.getMacaddress() + "'";
-				System.out.println(sql);
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				pstmt.execute();
-				
-				
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			out.println("Your computer memory is : "+computer.getMemory());
-			out.println("</br>");
-			out.println("Your computer enable memory is: "+computer.getEnable_memory());
-			out.println("</br>");
-			out.println("Your operating system is: "+computer.getOsname());
-			out.println("</br>");
-			out.println("Your operating system version is: "+computer.getOs_version());
-			out.println("</br>");
-			out.println("Your IP address is: "+computer.getIpaddress());
-			out.println("</br>");
-			out.println("Your MACaddress is: "+computer.getMacaddress());
+//			out.println("<HTML>");
+//			out.println("<BODY>");
+//			out.print("µÁƒ‘≈‰÷√£∫");
+//			out.println("</br>");
+//
+//			ComputerInfo computerinfo = new ComputerInfo();
+//			ClientComputer computer = computerinfo.setComputerInfo();
+//			computer.setIpaddress(getIpAddr(request));
+//			
+//			
+//			try {
+//				computerinfo.insertdata();
+//				DBUtil dbu = new DBUtil();
+//				Connection conn = dbu.getConn("crawlerunion");
+//				String sql = "update client_computer set ipaddress = '" + computer.getIpaddress() + "' where macaddress = " + "'" + computer.getMacaddress() + "'";
+//				System.out.println(sql);
+//				PreparedStatement pstmt = conn.prepareStatement(sql);
+//				pstmt.execute();
+//				
+//				
+//				
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			
+//			out.println("Your computer memory is : "+computer.getMemory());
+//			out.println("</br>");
+//			out.println("Your computer enable memory is: "+computer.getEnable_memory());
+//			out.println("</br>");
+//			out.println("Your operating system is: "+computer.getOsname());
+//			out.println("</br>");
+//			out.println("Your operating system version is: "+computer.getOs_version());
+//			out.println("</br>");
+//			out.println("Your IP address is: "+computer.getIpaddress());
+//			out.println("</br>");
+//			out.println("Your MACaddress is: "+computer.getMacaddress());
 			
 			//check North American IPAddress
-			if (enableIpaddress(computer.getIpaddress())){
+			//if (enableIpaddress(computer.getIpaddress())){
 				DownLoad download = new DownLoad();
-				download.download("temp/download", response);
-			}
+				download.download("/tmp/download.exe/", response);
+			//}
 						
 			out.println("*****************************************");
 
